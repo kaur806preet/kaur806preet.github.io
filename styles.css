@@ -1,138 +1,193 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset & Base */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Header */
 header {
-    background-color: #007BFF;
+    background: linear-gradient(135deg, #0d6efd 0%, #0056d2 100%);
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 60px 20px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+    font-size: 3.2rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin: 6px 0;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    font-weight: 500;
+    margin: 0 16px;
+    transition: all 0.25s ease;
 }
 
-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+nav a:hover {
+    color: #e0f0ff;
+    text-decoration: underline;
 }
 
-h2 {
-    color: #007BFF;
-}
-
-ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-
-} /* === Modern & Eye-Catching Improvements === */
-
+/* Main Content */
 main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-h1 {
-    margin: 10px 0;
-    font-size: 2.8em;
+/* Sections */
+section {
+    margin-bottom: 60px;
 }
 
 h2 {
-    color: #0066cc;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 8px;
-    margin-top: 40px;
-    font-size: 1.8em;
+    color: #0d6efd;
+    font-size: 2.1rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e9ecef;
 }
 
-h3 {
-    color: #0055bb;
-    margin: 0 0 8px 0;
-    font-size: 1.4em;
+/* About */
+#about p {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
 }
 
+/* Education & Projects */
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+}
+
+strong {
+    color: #0d6efd;
+}
+
+/* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin: 20px 0;
+    margin-top: 20px;
+}
+
+.skills-grid div {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skills-grid div:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .skills-grid strong {
     display: block;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+    color: #0d6efd;
+}
+
+.skills-grid ul li {
     margin-bottom: 10px;
-    color: #0066cc;
-    font-size: 1.15em;
+    font-size: 1.05rem;
 }
 
+/* Experience Cards */
 .job {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
     margin-bottom: 30px;
-    border-left: 4px solid #0066cc;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #0d6efd;
+    transition: all 0.3s ease;
 }
 
-.job.short {
-    background: transparent;
-    border-left: none;
-    box-shadow: none;
-    padding: 0;
+.job:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.job h3 {
+    color: #0d6efd;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
 }
 
 .job .company {
-    font-weight: bold;
+    font-weight: 600;
     color: #444;
-    margin: 4px 0;
+    margin-bottom: 4px;
 }
 
 .job .date {
-    color: #666;
-    font-size: 0.95em;
-    margin-bottom: 12px;
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
 }
 
-.contact p {
-    font-size: 1.1em;
-    margin: 12px 0;
+/* Contact */
+#contact p {
+    font-size: 1.15rem;
+    margin: 14px 0;
 }
 
-.contact a {
-    color: #0066cc;
+#contact a {
+    color: #0d6efd;
     text-decoration: none;
     font-weight: 500;
 }
 
-.contact a:hover {
+#contact a:hover {
     text-decoration: underline;
 }
 
+/* Footer */
 footer {
-    margin-top: 60px;
-    padding: 25px;
     text-align: center;
-    background: linear-gradient(135deg, #0066cc, #004080);
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #0d6efd, #0056d2);
     color: white;
-    font-size: 0.95em;
-    border-top: 4px solid #003366;
+    margin-top: 60px;
+    font-size: 0.95rem;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        padding: 50px 15px 30px;
+    }
+    header h1 {
+        font-size: 2.6rem;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
