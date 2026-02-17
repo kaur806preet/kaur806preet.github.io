@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Troubleshoot Assistant - Inderpreet Kaur</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            color: white;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            color: white;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .category {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            background: rgba(59,130,246,0.3);
+            transform: translateY(-5px);
+        }
+
+        .solution {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .solution.active {
+            display: block;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.08);
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            display: none;
+            z-index: 1000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IT Troubleshoot Assistant</h1>
+        <p>Built by Inderpreet Kaur • Computer Programming Diploma</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Describe your problem</h2>
+            <textarea id="problemInput" placeholder="Example: My WiFi is not connecting..."></textarea><br><br>
+            <button onclick="startTroubleshooting()">Get Step-by-Step Solution</button>
+        </div>
+
+        <h2 style="text-align:center; margin: 40px 0 25px;">Or choose a common issue:</h2>
+        <div class="categories">
+            <div class="category" onclick="quickStart('wifi')">🌐 WiFi / Internet</div>
+            <div class="category" onclick="quickStart('slow')">🐢 Computer Slow</div>
+            <div class="category" onclick="quickStart('blue')">💻 Blue Screen</div>
+            <div class="category" onclick="quickStart('windows')">🪟 Windows Error</div>
+        </div>
+
+        <div id="solutionBox" class="solution card">
+            <h2 id="solutionTitle"></h2>
+            <div id="solutionSteps"></div>
+            <button onclick="copySolution()" style="background:#10b981;">📋 Copy All Steps</button>
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast">✅ Copied to clipboard!</div>
+
+    <footer>
+        <p>Open to Entry-Level IT Support & Help Desk Roles</p>
+        <p>Toronto • BC • Alberta</p>
+    </footer>
+
+    <script>
+        const solutions = {
+            wifi: {
+                title: "WiFi / Internet Not Working",
+                steps: [
+                    "1. Restart your router and modem (wait 30 seconds)",
+                    "2. Forget the WiFi network and reconnect",
+                    "3. Run Windows Network Troubleshooter",
+                    "4. Check if airplane mode is off",
+                    "5. Try using a different device"
+                ]
+            },
+            slow: {
+                title: "Computer Running Very Slow",
+                steps: [
+                    "1. Open Task Manager (Ctrl + Shift + Esc)",
+                    "2. End high CPU/RAM programs",
+                    "3. Clear temporary files",
+                    "4. Disable startup programs",
+                    "5. Run Disk Cleanup"
+                ]
+            },
+            blue: {
+                title: "Blue Screen of Death",
+                steps: [
+                    "1. Note down the error code",
+                    "2. Restart in Safe Mode",
+                    "3. Run sfc /scannow",
+                    "4. Update graphics drivers",
+                    "5. Check for Windows updates"
+                ]
+            },
+            windows: {
+                title: "Windows Not Responding",
+                steps: [
+                    "1. Press Ctrl + Shift + Esc",
+                    "2. End unresponsive programs",
+                    "3. Restart Windows Explorer",
+                    "4. Run sfc /scannow",
+                    "5. Update Windows"
+                ]
+            }
+        };
+
+        function startTroubleshooting() {
+            const input = document.getElementById("problemInput").value.toLowerCase();
+            let key = "wifi";
+
+            if (input.includes("slow")) key = "slow";
+            else if (input.includes("blue") || input.includes("crash")) key = "blue";
+            else if (input.includes("windows") || input.includes("not responding")) key = "windows";
+
+            showSolution(key);
+        }
+
+        function quickStart(key) {
+            showSolution(key);
+        }
+
+        function showSolution(key) {
+            const data = solutions[key];
+            document.getElementById("solutionTitle").innerHTML = data.title;
+
+            let html = "";
+            data.steps.forEach(step => {
+                html += `<div class="step">${step}</div>`;
+            });
+
+            document.getElementById("solutionSteps").innerHTML = html;
+            document.getElementById("solutionBox").classList.add("active");
+            document.getElementById("solutionBox").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function copySolution() {
+            const text = document.getElementById("solutionSteps").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.style.display = "block";
+                setTimeout(() => toast.style.display = "none", 2500);
+            });
+        }
+    </script>
+</body>
+</html>
